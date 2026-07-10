@@ -21,7 +21,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/brotli-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -56,7 +58,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/ffnvcodec-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -91,7 +95,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/freetype2-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -126,7 +132,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/fribidi-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -161,7 +169,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/harfbuzz-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -196,7 +206,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/highway-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -231,7 +243,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/lcms2-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -266,7 +280,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/libbluray-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -301,7 +317,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/libplacebo-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -336,7 +354,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/libwebp-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -371,7 +391,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/luajit; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -406,7 +428,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/spirv-cross-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -441,7 +465,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/vulkan-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -477,10 +503,20 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/freetype2-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/fribidi-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/harfbuzz-dev-*-x86_64.pkg.tar.zst
+        # Download latest freetype2-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('freetype2-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: freetype2-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest fribidi-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('fribidi-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: fribidi-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest harfbuzz-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('harfbuzz-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: harfbuzz-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
         D:\msys64\usr\bin\bash -lc "pacman -U /d/a/mpv-win64/mpv-win64/*.zst --noconfirm"
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/libass-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
@@ -517,10 +553,20 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/brotli-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/highway-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/lcms2-dev-*-x86_64.pkg.tar.zst
+        # Download latest brotli-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('brotli-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: brotli-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest highway-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('highway-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: highway-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest lcms2-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('lcms2-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: lcms2-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
         D:\msys64\usr\bin\bash -lc "pacman -U /d/a/mpv-win64/mpv-win64/*.zst --noconfirm"
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/libjxl-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
@@ -556,7 +602,9 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/shaderc-dev; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg '
     - name: Delete
       uses: mknejp/delete-release-assets@v1
@@ -592,14 +640,36 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/ffnvcodec-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/vulkan-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/brotli-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/highway-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/lcms2-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/libjxl-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/libwebp-dev-*-x86_64.pkg.tar.zst
+        # Download latest ffnvcodec-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('ffnvcodec-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: ffnvcodec-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest vulkan-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('vulkan-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: vulkan-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest brotli-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('brotli-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: brotli-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest highway-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('highway-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: highway-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest lcms2-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('lcms2-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: lcms2-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest libjxl-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('libjxl-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: libjxl-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest libwebp-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('libwebp-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: libwebp-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
         D:\msys64\usr\bin\bash -lc "pacman -U /d/a/mpv-win64/mpv-win64/*.zst --noconfirm"
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/ffmpeg; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg -p PKGBUILD-git'
     - name: Delete
@@ -636,19 +706,56 @@ jobs:
         CPLUS_INCLUDE_PATH: /opt/include
         LIBRARY_PATH: /opt/lib
         MSYSTEM: UCRT64
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        curl -OL https://github.com/${{ github.repository }}/releases/download/bleeding_edge-x86-64-v3/ffmpeg-git-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/luajit-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/ffnvcodec-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/freetype2-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/fribidi-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/harfbuzz-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/libass-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/lcms2-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/libbluray-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/shaderc-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/spirv-cross-dev-*-x86_64.pkg.tar.zst
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/vulkan-dev-*-x86_64.pkg.tar.zst
+        # Download latest ffmpeg-git-dev from bleeding_edge-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/bleeding_edge-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('ffmpeg-git-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: ffmpeg-git-dev not found in bleeding_edge-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest luajit-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('luajit-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: luajit-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest ffnvcodec-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('ffnvcodec-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: ffnvcodec-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest freetype2-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('freetype2-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: freetype2-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest fribidi-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('fribidi-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: fribidi-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest harfbuzz-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('harfbuzz-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: harfbuzz-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest libass-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('libass-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: libass-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest lcms2-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('lcms2-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: lcms2-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest libbluray-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('libbluray-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: libbluray-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest shaderc-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('shaderc-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: shaderc-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest spirv-cross-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('spirv-cross-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: spirv-cross-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
+        # Download latest vulkan-dev from dev-x86-64-v3 release
+        ASSET_URL=$(curl -sL -H "Authorization: token ${{${{ secrets.GITHUB_TOKEN }}}}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/dev-x86-64-v3" | python -c "import sys,json; [print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].startswith('vulkan-dev-')]" | head -1)
+        if [ -z "$ASSET_URL" ]; then echo "ERROR: vulkan-dev not found in dev-x86-64-v3 release"; exit 1; fi
+        curl -OL "$ASSET_URL"
         D:\msys64\usr\bin\bash -lc "pacman -U /d/a/mpv-win64/mpv-win64/*.zst --noconfirm"
         D:\msys64\usr\bin\bash -lc 'cp /d/a/mpv-win64/mpv-win64/x86-64-v3.conf /etc/makepkg.conf; cd /d/a/mpv-win64/mpv-win64/mpv; PATH=/usr/bin:/opt/bin:/ucrt64/bin PKG_CONFIG_PATH=/opt/lib/pkgconfig makepkg -p PKGBUILD-git'
     - name: Delete
@@ -670,14 +777,24 @@ jobs:
   package-x86-64-v3:
     needs: [mpv-x86-64-v3]
     runs-on: windows-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - name: Package
       run: |
         $date = Get-Date -Format "yyyyMMdd"
-        curl -OL https://github.com/${{ github.repository }}/releases/download/bleeding_edge-x86-64-v3/ffmpeg-git-8.2pre-1-x86_64.pkg.tar.xz
-        curl -OL https://github.com/${{ github.repository }}/releases/download/dev-x86-64-v3/luajit-2.1-1-x86_64.pkg.tar.xz
-        curl -OL https://github.com/${{ github.repository }}/releases/download/bleeding_edge-x86-64-v3/mpv-git-0.42pre-1-x86_64.pkg.tar.xz
-        curl -OL https://github.com/${{ github.repository }}/releases/download/latest-x86-64-v3/mcfgthread-20260702-1-x86_64.pkg.tar.xz
+        $headers = @{ Authorization = "token $env:GITHUB_TOKEN" }
+        foreach ($item in @(
+          @{ tag = "bleeding_edge-x86-64-v3"; prefix = "ffmpeg-git-" },
+          @{ tag = "bleeding_edge-x86-64-v3"; prefix = "mpv-git-" },
+          @{ tag = "dev-x86-64-v3"; prefix = "luajit-dev-" },
+          @{ tag = "latest-x86-64-v3"; prefix = "mcfgthread-" }
+        )) {
+          $release = Invoke-RestMethod -Uri "https://api.github.com/repos/${{ github.repository }}/releases/tags/$($item.tag)" -Headers $headers
+          $asset = $release.assets | Where-Object { $_.name -like "$($item.prefix)*x86_64.pkg.tar.*" } | Select-Object -First 1
+          if (-not $asset) { Write-Error "$($item.prefix) not found in $($item.tag) release"; exit 1 }
+          Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $asset.name
+        }
         C:\msys64\usr\bin\bash -lc "pacman -U /d/a/mpv-win64/mpv-win64/*.xz --noconfirm"
         md C:\msys64\opt\bin\portable_config
         del *.xz
