@@ -1,0 +1,43 @@
+# Maintainer: nyfair <nyfair2012@gmail.com>
+# Modified: all sources converted to git HEAD
+pkgname=shaderc-dev
+pkgver=2026.2
+pkgrel=1
+pkgdesc='Collection of tools, libraries and tests for shader compilation'
+arch=('x86_64')
+url="https://github.com/google/shaderc/"
+license=('Apache')
+source=("git+https://github.com/google/shaderc"
+        "git+https://github.com/KhronosGroup/glslang"
+        "git+https://github.com/KhronosGroup/SPIRV-Headers"
+        "git+https://github.com/KhronosGroup/SPIRV-Tools")
+md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
+
+build() {
+  cd $srcdir
+  # Symlink the git-cloned dependencies into the locations shaderc expects
+  ln -sf ../glslang shaderc/third_party/glslang
+  ln -sf ../SPIRV-Headers shaderc/third_party/spirv-headers
+  ln -sf ../SPIRV-Tools shaderc/third_party/spirv-tools
+
+  cd $srcdir/glslang
+  sed -i '/namespace/i #include <cstdint>' glslang/MachineIndependent/SymbolTable.h
+  sed -i 's/-fno-exceptions/-fexceptions/g' CMakeLists.txt
+
+  cd $srcdir/shaderc
+  sed -i '/(build-version/,+4d' CMakeLists.txt
+  sed -i '/glslc/d' CMakeLists.txt
+  rm -rf build && mkdir build && cd build
+  cmake .. -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=/opt -DCMAKE_BUILD_TYPE=Release \
+    -DSHADERC_SKIP_TESTS=ON -DSHADERC_SKIP_COPYRIGHT_CHECK=ON -DSHADERC_SKIP_INSTALL=ON -DSHADERC_SKIP_EXAMPLES=ON -DENABLE_SPIRV_TOOLS_INSTALL=ON
+  cmake --build .
+}
+
+package() {
+  cd $srcdir/shaderc
+  mkdir -p $pkgdir/opt/lib/pkgconfig
+  cp -r libshaderc/include $pkgdir/opt
+  cp -r libshaderc_util/include/libshaderc_util $pkgdir/opt/include
+  cp build/libshaderc/libshaderc_combined.a $pkgdir/opt/lib
+  cp build/shaderc_combined.pc $pkgdir/opt/lib/pkgconfig
+}

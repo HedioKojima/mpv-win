@@ -1,0 +1,20 @@
+name: autoupdate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  version_check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Check Latest Version
+      run: |
+        pip install in_place
+        python autoupdate.py
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git commit -am "Automate version update" || echo "nothing to update"
+        git push

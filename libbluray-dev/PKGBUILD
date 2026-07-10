@@ -1,0 +1,27 @@
+# Maintainer: nyfair <nyfair2012@gmail.com>
+pkgname=libbluray-dev
+pkgver=1.4.1
+pkgrel=1
+pkgdesc='Library to access Blu-Ray disks for video playback'
+arch=('x86_64')
+url="https://www.videolan.org/developers/libbluray.html"
+makedepends=('freetype2-dev')
+license=('GPL')
+source=("git+https://code.videolan.org/videolan/libbluray.git")
+md5sums=('SKIP')
+
+build() {
+  cd $srcdir/libbluray
+  mkdir work
+  meson . work --prefix=/opt --buildtype=release --default-library=static \
+    -Denable_tools=false -Dbdj_jar=disabled -Dlibxml2=disabled -Dfontconfig=disabled
+  cd work
+  ninja
+}
+
+package() {
+  cd $srcdir/libbluray/work
+  DESTDIR=$pkgdir ninja install
+  mv $pkgdir/msys64/* $pkgdir
+  rm -rf $pkgdir/msys64
+}

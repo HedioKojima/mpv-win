@@ -1,0 +1,40 @@
+# Maintainer: nyfair <nyfair2012@gmail.com>
+# Modified: all sources converted to git HEAD
+pkgname=vulkan-dev
+pkgver=1.4.350.1
+pkgrel=1
+pkgdesc='Vulkan Header and Loader'
+arch=('x86_64')
+url="https://www.khronos.org/vulkan/"
+license=('APACHE')
+source=("git+https://github.com/KhronosGroup/Vulkan-Headers"
+        "git+https://github.com/KhronosGroup/Vulkan-Loader")
+md5sums=('SKIP' 'SKIP')
+
+build() {
+  export CFLAGS="${CFLAGS} -D__STDC_FORMAT_MACROS -Wno-unused-function"
+  export CPPFLAGS="${CPPFLAGS} -D__STDC_FORMAT_MACROS"
+  export CXXFLAGS="${CXXFLAGS} -D__USE_MINGW_ANSI_STDIO -D__STDC_FORMAT_MACROS -fpermissive -Wno-unused-function"
+
+  cd $srcdir/Vulkan-Headers
+  rm -rf build && mkdir build && cd build
+  cmake .. -G "MinGW Makefiles" -DVULKAN_HEADERS_ENABLE_MODULE=false -DCMAKE_INSTALL_PREFIX=/opt -DCMAKE_BUILD_TYPE=Release
+  cmake --install . --prefix=$srcdir/opt
+
+  cd $srcdir/Vulkan-Loader
+  # skip rc info and use vulkan-1.dll from your graphic driver
+  sed -i '/loader.rc/d' loader/CMakeLists.txt
+  sed -i '/RC_FILE_LOCATION/d' loader/CMakeLists.txt
+  sed -i 's/-1.def/-1.def)/' loader/CMakeLists.txt
+  rm -rf build && mkdir build && cd build
+  cmake .. -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=/opt -DCMAKE_BUILD_TYPE=Release \
+    -DVULKAN_HEADERS_INSTALL_DIR="${srcdir}/opt" -DBUILD_TESTS=OFF -DENABLE_WERROR=OFF -DUSE_MASM=OFF
+  cmake --build .
+}
+
+package() {
+  cd $srcdir/Vulkan-Headers/build
+  cmake --install . --prefix=$pkgdir/opt
+  cd $srcdir/Vulkan-Loader/build
+  cmake --install . --prefix=$pkgdir/opt
+}
