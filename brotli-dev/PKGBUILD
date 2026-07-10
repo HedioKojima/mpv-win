@@ -1,0 +1,21 @@
+pkgname=brotli-dev
+pkgver=1.2.0
+pkgrel=1
+pkgdesc='Generic-purpose lossless compression algorithm'
+arch=('x86_64')
+url="https://github.com/google/brotli/"
+license=('MIT')
+source=("git+https://github.com/google/brotli")
+md5sums=('SKIP')
+
+build() {
+  cd $srcdir/brotli
+  rm -rf build && mkdir build && cd build
+  cmake .. -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=/opt -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF
+  cmake --build .
+}
+  
+package() {
+  cd $srcdir/brotli/build
+  cmake --install . --prefix=$pkgdir/opt
+}

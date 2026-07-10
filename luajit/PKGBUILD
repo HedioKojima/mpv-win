@@ -1,0 +1,34 @@
+# Maintainer: nyfair <nyfair2012@gmail.com>
+pkgname=(luajit-dev luajit)
+pkgver=2.1
+pkgrel=1
+pkgdesc='Just-in-time compiler and drop-in replacement for Lua 5.1'
+arch=('x86_64')
+url="https://luajit.org/"
+license=('MIT')
+source=("git+https://github.com/LuaJIT/LuaJIT")
+md5sums=('SKIP')
+
+build() {
+  cd $srcdir/LuaJIT-2.1.ROLLING
+  make amalg BUILDMODE=dynamic
+}
+
+package_luajit-dev() {
+  cd $srcdir/LuaJIT-2.1.ROLLING
+  make DESTDIR=$pkgdir install
+  mkdir -p $pkgdir/opt/lib
+  mv $pkgdir/usr/local/include $pkgdir/opt
+  mv $pkgdir/usr/local/lib/pkgconfig $pkgdir/opt/lib
+  mv src/*.a $pkgdir/opt/lib
+  rm -rf $pkgdir/usr
+  sed -i 's/\/usr\/local/\/opt/' $pkgdir/opt/lib/pkgconfig/luajit.pc
+}
+
+package_luajit() {
+  export PKGEXT='.pkg.tar.xz'
+  cd $srcdir/LuaJIT-2.1.ROLLING
+  mkdir -p $pkgdir/opt/bin
+  mv src/lua*.exe $pkgdir/opt/bin
+  mv src/lua*.dll $pkgdir/opt/bin
+}

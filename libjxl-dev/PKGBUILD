@@ -1,0 +1,28 @@
+pkgname=libjxl-dev
+pkgver=0.12.0
+pkgrel=1
+pkgdesc='JPEG XL image format reference implementation'
+arch=('x86_64')
+url="https://github.com/libjxl/libjxl/"
+makedepends=('brotli-dev' 'highway-dev' 'lcms2-dev')
+license=('BSD')
+source=("git+https://github.com/libjxl/libjxl")
+md5sums=('SKIP')
+
+build() {
+  cd $srcdir/libjxl
+  sed -i '/utf8\.rc/d' tools/CMakeLists.txt
+  rm -rf build && mkdir build && cd build
+  cmake .. -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=/opt -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF \
+    -DJPEGXL_ENABLE_DOXYGEN=OFF -DBUILD_TESTING=OFF \
+    -DJPEGXL_ENABLE_MANPAGES=OFF -DJPEGXL_ENABLE_BENCHMARK=OFF -DJPEGXL_ENABLE_EXAMPLES=OFF \
+    -DJPEGXL_ENABLE_SKCMS=OFF -DJPEGXL_ENABLE_SJPEG=OFF -DJPEGXL_ENABLE_TRANSCODE_JPEG=OFF -DJPEGXL_ENABLE_JNI=OFF \
+    -DJPEGXL_FORCE_SYSTEM_BROTLI=ON -DJPEGXL_FORCE_SYSTEM_LCMS2=ON -DJPEGXL_FORCE_SYSTEM_HWY=ON -DJPEGXL_STATIC=ON \
+    -DJPEGXL_ENABLE_HWY_AVX3=ON -DJPEGXL_ENABLE_HWY_AVX3_ZEN4=ON -DJPEGLI_ENABLE_HWY_AVX3_SPR=ON
+  cmake --build .
+}
+
+package() {
+cd $srcdir/libjxl/build
+  cmake --install . --prefix=$pkgdir/opt
+}
