@@ -1,0 +1,249 @@
+name: mpv
+
+on: 
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "Publish a release"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      actions: write
+      contents: write
+    steps:
+      - uses: actions/checkout@main
+      - name: Setup git config
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global pull.rebase true
+          git config --global rebase.autoStash true
+          git config --global fetch.prune true
+      - name: Restore source cache
+        uses: actions/cache/restore@main
+        with:
+          path: src_packages
+          key: cached_source
+      - name: Restore build cache
+        uses: actions/cache/restore@main
+        with:
+          path: build
+          key: cached_build
+      - name: Restore llvm cache
+        uses: actions/cache/restore@main
+        with:
+          path: llvm
+          key: cached_llvm
+      - name: Restore rust cache
+        uses: actions/cache/restore@main
+        with:
+          path: rust
+          key: cached_rust
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ccache nasm libmimalloc2.0
+          pip install --user meson rst2pdf
+
+          function llvm_latest_tag {
+              echo $(curl -sL -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" https://api.github.com/repos/Kosm8/llvm-mingw/releases/latest | jq -r '.tag_name')
+          }
+
+          function install_latest_llvm {
+              mkdir -p llvm build/install
+              url=$(curl -sL \
+                         -H "Accept: application/vnd.github+json" \
+                         -H "X-GitHub-Api-Version: 2026-03-10" \
+                         https://api.github.com/repos/Kosm8/llvm-mingw/releases/latest \
+                         | jq -r '.assets[] | select(.name | match("ucrt-ubuntu.*x86_64")) | .browser_download_url')
+              echo $(llvm_latest_tag) > $PWD/llvm/version
+              echo "Downloading & installing llvm-mingw"
+              curl -sLO $url && echo "llvm-mingw is successfully downloaded"
+              filename=$(basename $url .tar.xz)
+              tar -xJf $filename.tar.xz -C $PWD/llvm --strip-components=1 $filename/bin $filename/lib --exclude "aarch64*" --exclude "arm64ec*" --exclude "armv7*" &&
+              tar -xJf $filename.tar.xz -C $PWD/build/install --strip-components=1 $filename/generic-w64-mingw32 $filename/x86_64-w64-mingw32 &&
+              echo "llvm-mingw is successfully installed"
+          }
+
+          if [ ! "$(ls -A $PWD/llvm/bin/clang)" ]; then
+              echo "llvm-mingw is not available"
+              install_latest_llvm
+          else
+              current=$(<$PWD/llvm/version)
+              latest=$(llvm_latest_tag)
+              if [[ "$current" < "$latest" ]]; then
+                  echo "Newer llvm-mingw is available"
+                  rm -rf $PWD/llvm
+                  install_latest_llvm
+              else
+                  echo "llvm-mingw is already latest"
+              fi
+          fi
+
+          export RUSTUP_HOME="$PWD/rust/.rustup"
+          export CARGO_HOME="$PWD/rust/.cargo"
+          export PATH="$CARGO_HOME/bin:$PATH"
+          if [[ ! "$(ls -A $CARGO_HOME/bin)" ]]; then
+              curl -sSf https://sh.rustup.rs |
+              sh -s -- -y --default-toolchain stable --target x86_64-pc-windows-gnullvm --no-modify-path --profile minimal
+          else
+              rustup update
+          fi
+      - name: Build
+        run: |
+          mkdir -p release
+
+          cmake -Wno-dev --fresh -DLLVM_LOCATION=$PWD/llvm -DMINGW_INSTALL_PREFIX=$PWD/build/install/x86_64-w64-mingw32 -DSINGLE_SOURCE_LOCATION=$PWD/src_packages -DRUST_LOCATION=$PWD/rust -G Ninja -B $PWD/build -S $PWD
+
+          ninja -C $PWD/build download || true
+          ninja -C $PWD/build update
+          ninja -C $PWD/build mpv-fullclean
+          ninja -C $PWD/build mpv
+          if [ -n "$(find $PWD/build -maxdepth 1 -type d -name "mpv" -print -quit)" ] ; then
+              echo "Successfully compiled mpv. Continue"
+          else
+              echo "Failed compiled mpv. Stop"
+              exit 1
+          fi
+
+          ninja -C $PWD/build cargo-clean
+
+          mv $PWD/build/mpv $PWD/release
+          cd $PWD/release
+          for dir in ./mpv; do
+              if [ -d $dir ]; then
+                  7z a -m0=lzma2 -mx=9 -ms=on mpv.7z $dir/* -x!*.7z
+                  rm -rf $dir
+              fi
+          done
+          cd ..
+          sudo rm -rf $PWD/build/mpv
+          sudo chmod -R a+rwx $PWD/build
+      - name: Collect logs
+        if: ${{ always() }}
+        run: |
+          sudo 7z a logs.7z $(find build -type f -iname "*-*.log" -or -wholename "*/ffbuild/config.log")
+      - name: Upload logs
+        uses: actions/upload-artifact@main
+        if: ${{ always() }}
+        with:
+          name: logs
+          path: logs.7z
+      - name: Upload mpv
+        uses: actions/upload-artifact@main
+        with:
+          name: mpv
+          path: release/mpv.7z
+      - name: Job summary
+        uses: actions/github-script@main
+        if: ${{ always() }}
+        with:
+          script: |
+            const path = require('path');
+            const { readdirSync,existsSync } = require('fs');
+            const myExec = async (command, args = null) => await exec.getExecOutput(command,args,{silent: true}).then(result => result.stdout.trim()).catch(err => '');
+            
+            const rootdir = process.cwd();
+            const workdir = path.resolve(rootdir,"src_packages");
+            const isGitSync = dirname => existsSync(path.join(workdir, dirname, '.git'));
+            
+            const getGithubUrl = (hash,remote) => remote.replace(/\.git$/,"") + `/commit/${hash}`;
+            function getCommitUrl(hash,remote) {
+                let url = "";
+                switch (true) {
+                  case /github\.com/.test(remote):
+                    url = getGithubUrl(hash,remote);
+                    break;
+                  default:
+                    url = remote;
+                    break;
+                }
+                return url;
+            }
+            async function repo_info(dir){
+              let local_hash = await myExec(`git -C ${dir} rev-parse --short=7 HEAD`);
+              let remote_branch = await myExec(`git -C ${dir} rev-parse --abbrev-ref HEAD@{upstream}`);
+              let remote_hash = await myExec(`git -C ${dir} rev-parse ${remote_branch}`);
+              let status = await myExec(`git -C ${dir} status -sb`).then(s => s.split("\n",1)[0].replace(/^## */,""));
+              let remote = await myExec(`git -C ${dir} config --get remote.origin.url`);
+              return [local_hash, remote_hash, status, remote]
+            }
+            
+            async function generateGitInfoTable(targetDir){
+              const dirs = readdirSync(targetDir, { withFileTypes: true })
+                .filter(dirent => dirent.isDirectory() && isGitSync(dirent.name) )
+                .map(dirent => path.join(targetDir, dirent.name));
+              let info_table = [[{data: 'Package', header: true}, {data: 'Local commit', header: true}, {data: 'Status', header: true}, {data: 'Remote commit', header: true}]];
+              for (let dir of dirs) {
+                [local_hash, remote_hash, status, remote] = await repo_info(dir)
+                let url = getCommitUrl(remote_hash, remote);
+                let package_name = path.basename(dir);
+                info_table.push([package_name, local_hash, status, `<a href="${url}">${remote_hash.slice(0,7)}</a>`]);
+              }
+              return info_table;
+            }
+
+            await core.summary.clear();
+            let packages_table = await generateGitInfoTable(workdir);
+            packages_table = core.summary.addTable(packages_table).stringify();
+            await core.summary.clear();
+            
+            const exec_path = path.join(rootdir,'build','exec');
+            const clang_version = (await myExec(`${exec_path}`,["clang","--version"])).split('\n')[0];
+            const rustc_version = (await myExec(`${exec_path}`,["rustc","--version"]));
+
+            core.summary
+              .addRaw(`Compiler:`,true)
+              .addRaw(`${clang_version}`,true)
+              .addRaw(`${rustc_version}`,true);
+            await core.summary.addDetails('Packages Version',packages_table).write();
+      - name: Delete all previous cache
+        run : |
+          cache_key=("cached_source" "cached_build" "cached_llvm" "cached_rust")
+          for cache_key in "${cache_key[@]}"; do
+              curl -L \
+              -X DELETE \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ github.token }}" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/caches?key=$cache_key&ref=${{ github.ref }}"
+          done
+      - name: Save source cache
+        uses: actions/cache/save@main
+        with:
+          path: src_packages
+          key: cached_source
+      - name: Save build cache
+        uses: actions/cache/save@main
+        with:
+          path: build
+          key: cached_build
+      - name: Save llvm cache
+        uses: actions/cache/save@main
+        with:
+          path: llvm
+          key: cached_llvm
+      - name: Save rust cache
+        uses: actions/cache/save@main
+        with:
+          path: rust
+          key: cached_rust
+      - name: Upload release
+        if: ${{ inputs.release == true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run:  |
+          gh release delete mpv --cleanup-tag --yes || true
+          echo -e "**Build Time**:  $(date "+%Y-%m-%d %H:%M")\n \
+                   **Build Details**:  https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\n" \
+                   > notes.md
+          gh release create mpv --title mpv --notes-file notes.md release/mpv.7z
