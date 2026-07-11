@@ -40,6 +40,8 @@ ExternalProject_Add(ffmpeg
         --enable-muxer=image2
         --disable-demuxer=matroska
         --disable-devices
+        --disable-bsfs
+        --disable-filters
         --disable-encoders
         --enable-encoder=libjxl
         --enable-encoder=png
