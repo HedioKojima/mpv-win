@@ -26,6 +26,7 @@ list(APPEND ep
     shaderc
     fast_float
     libplacebo
+    nvcodec-headers
     ffmpeg
     mpv
 )

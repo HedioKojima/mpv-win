@@ -4,6 +4,7 @@ ExternalProject_Add(ffmpeg
         libiconv
         libjxl
         dav1d
+        nvcodec-headers
     GIT_REPOSITORY https://github.com/FFmpeg/FFmpeg.git
     SOURCE_DIR ${SOURCE_LOCATION}
     GIT_CLONE_FLAGS "--sparse --filter=tree:0"
@@ -27,6 +28,10 @@ ExternalProject_Add(ffmpeg
         --enable-schannel
         --enable-d3d11va
         --enable-d3d12va
+        --disable-cuda-llvm
+        --disable-cuvid
+        --enable-nvdec
+        --enable-nvenc
         --disable-doc
         --disable-programs
         --disable-debug
