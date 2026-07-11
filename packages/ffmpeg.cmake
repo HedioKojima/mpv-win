@@ -28,7 +28,7 @@ ExternalProject_Add(ffmpeg
         --enable-schannel
         --enable-d3d11va
         --enable-d3d12va
-        --disable-cuda-llvm
+        --enable-ffnvcodec
         --disable-cuvid
         --enable-nvdec
         --enable-nvenc
