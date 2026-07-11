@@ -5,6 +5,7 @@ list(APPEND ep
     zlib
     lcms2
     libiconv
+    nvcodec-headers
     luajit
     fribidi
     brotli
@@ -26,7 +27,6 @@ list(APPEND ep
     shaderc
     fast_float
     libplacebo
-    nvcodec-headers
     ffmpeg
     mpv
 )
