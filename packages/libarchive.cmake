@@ -29,7 +29,7 @@ ExternalProject_Add(libarchive
         -DENABLE_LIBB2=OFF
         -DENABLE_LZMA=ON
         -DENABLE_CPIO=OFF
-        -DENABLE_CNG=OFF
+        -DENABLE_CNG=ON
         -DENABLE_CAT=OFF
         -DENABLE_TAR=OFF
         -DENABLE_ACL=OFF
