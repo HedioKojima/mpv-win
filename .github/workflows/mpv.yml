@@ -55,7 +55,7 @@ jobs:
           pip install --user meson rst2pdf
 
           function llvm_latest_tag {
-              echo $(curl -sL -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" https://api.github.com/repos/HedioKojima/llvm-mingw/releases/latest | jq -r '.tag_name')
+              echo $(curl -sL -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" https://api.github.com/repos/mstorsjo/llvm-mingw/releases/latest | jq -r '.tag_name')
           }
 
           function install_latest_llvm {
@@ -63,8 +63,8 @@ jobs:
               url=$(curl -sL \
                          -H "Accept: application/vnd.github+json" \
                          -H "X-GitHub-Api-Version: 2026-03-10" \
-                         https://api.github.com/repos/HedioKojima/llvm-mingw/releases/latest \
-                         | jq -r '.assets[] | select(.name | match("ucrt-ubuntu.*x86_64")) | .browser_download_url')
+                         https://api.github.com/repos/mstorsjo/llvm-mingw/releases/latest \
+                         | jq -r '.assets[] | select(.name | match("ucrt-ubuntu.*x86_64.tar.xz")) | .browser_download_url')
               echo $(llvm_latest_tag) > $PWD/llvm/version
               echo "Downloading & installing llvm-mingw"
               curl -sLO $url && echo "llvm-mingw is successfully downloaded"
@@ -154,6 +154,7 @@ jobs:
             
             const rootdir = process.cwd();
             const workdir = path.resolve(rootdir,"src_packages");
+
             const isGitSync = dirname => existsSync(path.join(workdir, dirname, '.git'));
             
             const getGithubUrl = (hash,remote) => remote.replace(/\.git$/,"") + `/commit/${hash}`;
@@ -173,7 +174,8 @@ jobs:
               let local_hash = await myExec(`git -C ${dir} rev-parse --short=7 HEAD`);
               let remote_branch = await myExec(`git -C ${dir} rev-parse --abbrev-ref HEAD@{upstream}`);
               let remote_hash = await myExec(`git -C ${dir} rev-parse ${remote_branch}`);
-              let status = await myExec(`git -C ${dir} status -sb`).then(s => s.split("\n",1)[0].replace(/^## */,""));
+              let status = await myExec(`git -C ${dir} status -sb`).then(s => 
+              s.split("\n",1)[0].replace(/^## */,""));
               let remote = await myExec(`git -C ${dir} config --get remote.origin.url`);
               return [local_hash, remote_hash, status, remote]
             }
@@ -182,12 +184,13 @@ jobs:
               const dirs = readdirSync(targetDir, { withFileTypes: true })
                 .filter(dirent => dirent.isDirectory() && isGitSync(dirent.name) )
                 .map(dirent => path.join(targetDir, dirent.name));
+
               let info_table = [[{data: 'Package', header: true}, {data: 'Local commit', header: true}, {data: 'Status', header: true}, {data: 'Remote commit', header: true}]];
               for (let dir of dirs) {
                 [local_hash, remote_hash, status, remote] = await repo_info(dir)
                 let url = getCommitUrl(remote_hash, remote);
                 let package_name = path.basename(dir);
-                info_table.push([package_name, local_hash, status, `<a href="${url}">${remote_hash.slice(0,7)}</a>`]);
+                info_table.push([package_name, local_hash, status, `${remote_hash.slice(0,7)}`]);
               }
               return info_table;
             }
@@ -210,7 +213,7 @@ jobs:
         run : |
           cache_key=("cached_source" "cached_build" "cached_llvm" "cached_rust")
           for cache_key in "${cache_key[@]}"; do
-              curl -L \
+            curl -L \
               -X DELETE \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ github.token }}" \
