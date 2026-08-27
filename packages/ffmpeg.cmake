@@ -41,7 +41,6 @@ ExternalProject_Add(ffmpeg
         --disable-demuxer=matroska
         --disable-devices
         --disable-bsfs
-        --disable-filters
         --disable-encoders
         --enable-encoder=libjxl
         --enable-encoder=png
