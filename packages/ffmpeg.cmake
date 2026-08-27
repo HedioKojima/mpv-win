@@ -31,7 +31,7 @@ ExternalProject_Add(ffmpeg
         --enable-ffnvcodec
         --disable-cuvid
         --enable-nvdec
-        --enable-nvenc
+        --disable-nvenc
         --disable-doc
         --disable-programs
         --disable-debug
