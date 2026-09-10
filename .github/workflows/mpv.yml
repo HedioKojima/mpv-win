@@ -54,46 +54,22 @@ jobs:
           sudo apt install --no-install-recommends -y ccache nasm libmimalloc3
           pip install --user meson rst2pdf
 
-          # ============================================================
-          # 修改区域：获取 mstorsjo/llvm-mingw 发布日期最新的版本（Stable或Pre-release）
-          # ============================================================
-          
           function llvm_latest_tag {
-              # 获取所有releases，按发布时间(published_at)降序排序，取第一个的tag_name
-              # 这样无论是Stable还是Pre-release，只要发布时间最新就会被选中
-              echo $(curl -sL -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" https://api.github.com/repos/mstorsjo/llvm-mingw/releases | jq -r '[.[]] | sort_by(.published_at) | reverse | .[0].tag_name')
+              echo $(curl -sL -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" https://api.github.com/repos/mstorsjo/llvm-mingw/releases/latest | jq -r '.tag_name')
           }
 
           function install_latest_llvm {
               mkdir -p llvm build/install
-              
-              # 获取所有releases数据
-              release_info=$(curl -sL \
+              url=$(curl -sL \
                          -H "Accept: application/vnd.github+json" \
                          -H "X-GitHub-Api-Version: 2026-03-10" \
-                         https://api.github.com/repos/mstorsjo/llvm-mingw/releases)
-              
-              # 从所有releases中，按发布时间倒序，取最新的一个，并提取匹配的asset下载链接
-              url=$(echo "$release_info" | jq -r '[.[]] | sort_by(.published_at) | reverse | .[0].assets[] | select(.name | match("ucrt-ubuntu.*x86_64.tar.xz")) | .browser_download_url')
-              
-              if [ -z "$url" ]; then
-                  echo "Error: No asset found matching 'ucrt-ubuntu.*x86_64.tar.xz' in the latest release"
-                  exit 1
-              fi
-
-              # 获取对应的Tag用于版本记录
-              tag=$(echo "$release_info" | jq -r '[.[]] | sort_by(.published_at) | reverse | .[0].tag_name')
-
-              echo "$tag" > $PWD/llvm/version
-              echo "Downloading & installing llvm-mingw ($tag)"
-              echo "Download URL: $url"
-              
+                         https://api.github.com/repos/mstorsjo/llvm-mingw/releases/latest \
+                         | jq -r '.assets[] | select(.name | match("ucrt-ubuntu.*x86_64")) | .browser_download_url')
+              echo $(llvm_latest_tag) > $PWD/llvm/version
+              echo "Downloading & installing llvm-mingw"
               curl -sLO $url && echo "llvm-mingw is successfully downloaded"
               filename=$(basename $url .tar.xz)
-              
-              # 解压：提取bin和lib到llvm目录，排除ARM架构
               tar -xJf $filename.tar.xz -C $PWD/llvm --strip-components=1 $filename/bin $filename/lib --exclude "aarch64*" --exclude "arm64ec*" --exclude "armv7*" &&
-              # 解压：提取sysroots到install目录
               tar -xJf $filename.tar.xz -C $PWD/build/install --strip-components=1 $filename/generic-w64-mingw32 $filename/x86_64-w64-mingw32 &&
               echo "llvm-mingw is successfully installed"
           }
@@ -104,19 +80,14 @@ jobs:
           else
               current=$(<$PWD/llvm/version)
               latest=$(llvm_latest_tag)
-              # 比较版本Tag，如果不一致则更新
-              if [[ "$current" != "$latest" ]]; then
-                  echo "Newer llvm-mingw is available (current: $current, latest: $latest)"
+              if [[ "$current" < "$latest" ]]; then
+                  echo "Newer llvm-mingw is available"
                   rm -rf $PWD/llvm
                   install_latest_llvm
               else
-                  echo "llvm-mingw is already latest ($current)"
+                  echo "llvm-mingw is already latest"
               fi
           fi
-
-          # ============================================================
-          # 结束修改区域
-          # ============================================================
 
           export RUSTUP_HOME="$PWD/rust/.rustup"
           export CARGO_HOME="$PWD/rust/.cargo"
@@ -183,7 +154,6 @@ jobs:
             
             const rootdir = process.cwd();
             const workdir = path.resolve(rootdir,"src_packages");
-
             const isGitSync = dirname => existsSync(path.join(workdir, dirname, '.git'));
             
             const getGithubUrl = (hash,remote) => remote.replace(/\.git$/,"") + `/commit/${hash}`;
@@ -203,8 +173,7 @@ jobs:
               let local_hash = await myExec(`git -C ${dir} rev-parse --short=7 HEAD`);
               let remote_branch = await myExec(`git -C ${dir} rev-parse --abbrev-ref HEAD@{upstream}`);
               let remote_hash = await myExec(`git -C ${dir} rev-parse ${remote_branch}`);
-              let status = await myExec(`git -C ${dir} status -sb`).then(s => 
-              s.split("\n",1)[0].replace(/^## */,""));
+              let status = await myExec(`git -C ${dir} status -sb`).then(s => s.split("\n",1)[0].replace(/^## */,""));
               let remote = await myExec(`git -C ${dir} config --get remote.origin.url`);
               return [local_hash, remote_hash, status, remote]
             }
@@ -213,13 +182,12 @@ jobs:
               const dirs = readdirSync(targetDir, { withFileTypes: true })
                 .filter(dirent => dirent.isDirectory() && isGitSync(dirent.name) )
                 .map(dirent => path.join(targetDir, dirent.name));
-
               let info_table = [[{data: 'Package', header: true}, {data: 'Local commit', header: true}, {data: 'Status', header: true}, {data: 'Remote commit', header: true}]];
               for (let dir of dirs) {
                 [local_hash, remote_hash, status, remote] = await repo_info(dir)
                 let url = getCommitUrl(remote_hash, remote);
                 let package_name = path.basename(dir);
-                info_table.push([package_name, local_hash, status, `${remote_hash.slice(0,7)}`]);
+                info_table.push([package_name, local_hash, status, `<a href="${url}">${remote_hash.slice(0,7)}</a>`]);
               }
               return info_table;
             }
@@ -242,7 +210,7 @@ jobs:
         run : |
           cache_key=("cached_source" "cached_build" "cached_llvm" "cached_rust")
           for cache_key in "${cache_key[@]}"; do
-            curl -L \
+              curl -L \
               -X DELETE \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ github.token }}" \
