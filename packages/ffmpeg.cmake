@@ -46,6 +46,7 @@ ExternalProject_Add(ffmpeg
         --enable-encoder=png
         --enable-encoder=mjpeg
         --disable-decoder=aac_fixed,ac3_fixed,mp1,mp2,mp3,mp3adu,mp3on4
+        --enable-w32threads
     BUILD_COMMAND ${MAKE}
     INSTALL_COMMAND ${MAKE} install
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
