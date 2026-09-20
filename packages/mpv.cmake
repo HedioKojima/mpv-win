@@ -26,6 +26,8 @@ ExternalProject_Add(mpv
         -Dlua=luajit
         -Dgl=disabled
         -Ddirect3d=disabled
+        -Dwin32-subsystem=console
+        -Dwin32-threads=enabled
     BUILD_COMMAND ${EXEC} LTO_JOB=1 ninja
     INSTALL_COMMAND ""
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
