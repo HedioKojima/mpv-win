@@ -22,7 +22,7 @@ ExternalProject_Add(mpv
         -Db_lto=true
         -Db_lto_mode=thin
         -Dlibmpv=false
-        -Dpdf-build=enabled
+        -Dpdf-build=disabled
         -Dlua=luajit
         -Dgl=disabled
         -Ddirect3d=disabled
@@ -36,9 +36,7 @@ ExternalProject_Add(mpv
 ExternalProject_Add_Step(mpv copy-binary
     DEPENDEES build
     COMMAND ${CMAKE_COMMAND} -E copy <BINARY_DIR>/mpv.exe ${CMAKE_BINARY_DIR}/mpv/mpv.exe
-    COMMAND ${CMAKE_COMMAND} -E copy <BINARY_DIR>/mpv.com ${CMAKE_BINARY_DIR}/mpv/mpv.com
-    COMMAND ${CMAKE_COMMAND} -E copy <BINARY_DIR>/mpv.pdf ${CMAKE_BINARY_DIR}/mpv/doc/manual.pdf
-    COMMENT "Copying mpv binaries and manual"
+    COMMENT "Copying mpv binaries"
 )
 
 force_rebuild_git(mpv)
