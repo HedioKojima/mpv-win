@@ -3,12 +3,20 @@ list(APPEND ep
     xz
     uchardet
     zlib
+    zstd
+    c-ares
+    libpsl
+    nghttp2
+    nghttp3
+    brotli
+    openssl
+    ngtcp2
+    curl
     lcms2
     libiconv
     nvcodec-headers
     luajit
     fribidi
-    brotli
     freetype2
     harfbuzz
     libunibreak
@@ -16,9 +24,8 @@ list(APPEND ep
     subrandr
     xxhash
     dav1d
+    svtav1
     libarchive
-    highway
-    libjxl
     spirv-headers
     spirv-tools
     spirv-cross

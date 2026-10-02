@@ -1,5 +1,6 @@
 ExternalProject_Add(mpv
     DEPENDS
+        curl
         ffmpeg
         lcms2
         libarchive
@@ -22,6 +23,7 @@ ExternalProject_Add(mpv
         -Db_lto=true
         -Db_lto_mode=thin
         -Dlibmpv=false
+        -Dlibcurl=enabled
         -Dpdf-build=disabled
         -Dlua=luajit
         -Dgl=disabled

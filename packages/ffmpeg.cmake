@@ -2,9 +2,10 @@ ExternalProject_Add(ffmpeg
     DEPENDS
         zlib
         libiconv
-        libjxl
+        svtav1
         dav1d
         nvcodec-headers
+        curl
     GIT_REPOSITORY https://github.com/FFmpeg/FFmpeg.git
     SOURCE_DIR ${SOURCE_LOCATION}
     GIT_CLONE_FLAGS "--sparse --filter=tree:0"
@@ -24,7 +25,8 @@ ExternalProject_Add(ffmpeg
         --enable-zlib
         --enable-iconv
         --enable-libdav1d
-        --enable-libjxl
+        --enable-libsvtav1
+        --enable-libcurl
         --enable-schannel
         --enable-d3d11va
         --enable-d3d12va
@@ -42,7 +44,7 @@ ExternalProject_Add(ffmpeg
         --disable-devices
         --disable-bsfs
         --disable-encoders
-        --enable-encoder=libjxl
+        --enable-encoder=libsvtav1
         --enable-encoder=png
         --enable-encoder=mjpeg
         --disable-decoder=aac_fixed,ac3_fixed,mp1,mp2,mp3,mp3adu,mp3on4
