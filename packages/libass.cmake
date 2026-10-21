@@ -10,8 +10,8 @@ ExternalProject_Add(libass
     GIT_CLONE_FLAGS "--filter=tree:0"
     UPDATE_COMMAND ""
     CONFIGURE_COMMAND ${EXEC} CONF=1 meson setup <BINARY_DIR> <SOURCE_DIR>
-        --cross-file=${MESON_CROSS}
         --buildtype=release
+        --cross-file=${MESON_CROSS}
         -Dfontconfig=disabled
         -Ddirectwrite=enabled
         -Dasm=enabled
