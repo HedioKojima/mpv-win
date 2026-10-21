@@ -2,6 +2,7 @@ ExternalProject_Add(libarchive
     DEPENDS
         xz
         zlib
+        zstd
         libiconv
     GIT_REPOSITORY https://github.com/libarchive/libarchive.git
     SOURCE_DIR ${SOURCE_LOCATION}
@@ -15,7 +16,7 @@ ExternalProject_Add(libarchive
         -DCMAKE_INSTALL_LIBDIR=lib
         -DBUILD_SHARED_LIBS=OFF
         -DENABLE_ZLIB=ON
-        -DENABLE_ZSTD=OFF
+        -DENABLE_ZSTD=ON
         -DENABLE_OPENSSL=OFF
         -DENABLE_BZip2=OFF
         -DENABLE_ICONV=ON
