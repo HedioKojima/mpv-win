@@ -5,7 +5,7 @@ ExternalProject_Add(ffmpeg
         svtav1
         dav1d
         nvcodec-headers
-        curl
+        #curl
     GIT_REPOSITORY https://github.com/FFmpeg/FFmpeg.git
     SOURCE_DIR ${SOURCE_LOCATION}
     GIT_CLONE_FLAGS "--sparse --filter=tree:0"
@@ -26,10 +26,9 @@ ExternalProject_Add(ffmpeg
         --enable-iconv
         --enable-libdav1d
         --enable-libsvtav1
-        --enable-libcurl
+        #--enable-libcurl
         --enable-schannel
         --enable-d3d11va
-        --enable-d3d12va
         --enable-ffnvcodec
         --disable-cuvid
         --enable-nvdec
