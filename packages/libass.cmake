@@ -11,6 +11,7 @@ ExternalProject_Add(libass
     UPDATE_COMMAND ""
     CONFIGURE_COMMAND ${EXEC} CONF=1 meson setup <BINARY_DIR> <SOURCE_DIR>
         --cross-file=${MESON_CROSS}
+        --buildtype=release
         -Dfontconfig=disabled
         -Ddirectwrite=enabled
         -Dasm=enabled
