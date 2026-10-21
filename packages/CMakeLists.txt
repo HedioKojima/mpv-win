@@ -4,14 +4,14 @@ list(APPEND ep
     uchardet
     zlib
     zstd
-    c-ares
-    libpsl
-    nghttp2
-    nghttp3
+    #c-ares
+    #libpsl
+    #nghttp2
+    #nghttp3
     brotli
-    openssl
-    ngtcp2
-    curl
+    #openssl
+    #ngtcp2
+    #curl
     lcms2
     libiconv
     nvcodec-headers
