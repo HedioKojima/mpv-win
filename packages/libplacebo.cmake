@@ -19,8 +19,8 @@ ExternalProject_Add(libplacebo
               COMMAND ${CMAKE_COMMAND} -E create_symlink ${src_vulkan-header} <SOURCE_DIR>/3rdparty/Vulkan-Headers
               COMMAND ${CMAKE_COMMAND} -E create_symlink ${src_fast_float} <SOURCE_DIR>/3rdparty/fast_float
               COMMAND ${EXEC} CONF=1 meson setup <BINARY_DIR> <SOURCE_DIR>
-                  --cross-file=${MESON_CROSS}
                   --buildtype=release
+                  --cross-file=${MESON_CROSS}
                   -Ddemos=false
                   -Dopengl=disabled
                   -Dvulkan=disabled
