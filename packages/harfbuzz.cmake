@@ -10,6 +10,7 @@ ExternalProject_Add(harfbuzz
     UPDATE_COMMAND ""
     CONFIGURE_COMMAND ${EXEC} CONF=1 meson setup <BINARY_DIR> <SOURCE_DIR>
         --cross-file=${MESON_CROSS}
+        --buildtype=release
         -Dicu=disabled
         -Dglib=disabled
         -Dgobject=disabled
