@@ -1,6 +1,6 @@
 ExternalProject_Add(mpv
     DEPENDS
-        curl
+        #curl
         ffmpeg
         lcms2
         libarchive
@@ -19,11 +19,12 @@ ExternalProject_Add(mpv
     UPDATE_COMMAND ""
     CONFIGURE_COMMAND ${EXEC} CONF=1 meson setup <BINARY_DIR> <SOURCE_DIR>
         --cross-file=${MESON_CROSS}
+        --buildtype=release
         -Db_ndebug=true
         -Db_lto=true
         -Db_lto_mode=thin
         -Dlibmpv=false
-        -Dlibcurl=enabled
+        #-Dlibcurl=enabled
         -Dpdf-build=disabled
         -Dlua=luajit
         -Dgl=disabled
