@@ -1,6 +1,6 @@
 ExternalProject_Add(libiconv
-    URL https://www.mirrorservice.org/sites/ftp.gnu.org/gnu/libiconv/libiconv-1.19.tar.gz
-    URL_HASH SHA256=88DD96A8C0464ECA144FC791AE60CD31CD8EE78321E67397E25FC095C4A19AA6
+    URL https://www.mirrorservice.org/sites/ftp.gnu.org/gnu/libiconv/libiconv-1.19.1.tar.gz
+    URL_HASH SHA256=9a06844846d664d7122161700c10a64480d7c7bcead3091925a785b38c91edab
     DOWNLOAD_DIR ${SOURCE_LOCATION}
     CONFIGURE_COMMAND ${EXEC} CONF=1 <SOURCE_DIR>/configure
         --host=${TARGET_ARCH}
