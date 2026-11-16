@@ -55,7 +55,7 @@ jobs:
           pip install --user meson rst2pdf
 
           function llvm_latest_tag {
-              echo $(curl -sL -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" https://api.github.com/repos/mstorsjo/llvm-mingw/releases/latest | jq -r '.tag_name')
+              echo $(curl -sL -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" https://api.github.com/repos/Kosm8/llvm-mingw/releases/latest | jq -r '.tag_name')
           }
 
           function install_latest_llvm {
@@ -63,7 +63,7 @@ jobs:
               url=$(curl -sL \
                          -H "Accept: application/vnd.github+json" \
                          -H "X-GitHub-Api-Version: 2026-03-10" \
-                         https://api.github.com/repos/mstorsjo/llvm-mingw/releases/latest \
+                         https://api.github.com/repos/Kosm8/llvm-mingw/releases/latest \
                          | jq -r '.assets[] | select(.name | match("ucrt-ubuntu.*x86_64")) | .browser_download_url')
               echo $(llvm_latest_tag) > $PWD/llvm/version
               echo "Downloading & installing llvm-mingw"
@@ -102,7 +102,7 @@ jobs:
         run: |
           mkdir -p release
 
-          cmake -Wno-dev --fresh -DLLVM_LOCATION=$PWD/llvm -DMINGW_INSTALL_PREFIX=$PWD/build/install/x86_64-w64-mingw32 -DSINGLE_SOURCE_LOCATION=$PWD/src_packages -DRUST_LOCATION=$PWD/rust -G Ninja -B $PWD/build -S $PWD
+          cmake -Wno-author --fresh -DLLVM_LOCATION=$PWD/llvm -DMINGW_INSTALL_PREFIX=$PWD/build/install/x86_64-w64-mingw32 -DSINGLE_SOURCE_LOCATION=$PWD/src_packages -DRUST_LOCATION=$PWD/rust -G Ninja -B $PWD/build -S $PWD
 
           ninja -C $PWD/build download || true
           ninja -C $PWD/build update
