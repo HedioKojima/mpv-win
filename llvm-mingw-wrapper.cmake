@@ -1,4 +1,4 @@
-set(cxx_runtime "-static-libgcc -static-libstdc++"
+set(cxx_runtime "-static-libgcc -static-libstdc++")
 
 foreach(compiler clang++ g++ c++ clang gcc as)
     set(driver_mode "")
