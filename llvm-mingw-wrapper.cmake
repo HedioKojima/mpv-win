@@ -1,3 +1,5 @@
+set(cxx_runtime "-static-libgcc -static-libstdc++"
+
 foreach(compiler clang++ g++ c++ clang gcc as)
     set(driver_mode "")
     set(clang_compiler "")
@@ -6,10 +8,11 @@ foreach(compiler clang++ g++ c++ clang gcc as)
     if (compiler STREQUAL "g++" OR compiler STREQUAL "c++")
         set(driver_mode "--driver-mode=g++ -pthread")
         set(clang_compiler "clang++")
+        set(linker "${cxx_runtime}")
     elseif(compiler STREQUAL "clang++")
         set(driver_mode "--driver-mode=g++")
         set(clang_compiler "clang++")
-        set(linker "-lc++abi")
+        set(linker "${cxx_runtime} -lc++abi")
     else()
         set(driver_mode "")
         set(clang_compiler "clang")
