@@ -24,7 +24,7 @@ list(APPEND ep
     subrandr
     xxhash
     dav1d
-    svtav1
+    #svtav1
     libarchive
     spirv-headers
     spirv-tools
