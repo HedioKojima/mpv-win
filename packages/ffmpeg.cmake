@@ -2,7 +2,7 @@ ExternalProject_Add(ffmpeg
     DEPENDS
         zlib
         libiconv
-        svtav1
+        #svtav1
         dav1d
         nvcodec-headers
         #curl
@@ -40,11 +40,11 @@ ExternalProject_Add(ffmpeg
         --disable-demuxer=matroska
         --disable-devices
         --disable-encoders
-        --enable-encoder=libsvtav1
+        #--enable-encoder=libsvtav1
         --enable-encoder=png
         --enable-encoder=mjpeg
         --disable-decoder=aac_fixed,ac3_fixed,mp1,mp2,mp3,mp3adu,mp3on4
-        --enable-w32threads
+        #--enable-w32threads
     BUILD_COMMAND ${MAKE}
     INSTALL_COMMAND ${MAKE} install
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
