@@ -25,7 +25,7 @@ ExternalProject_Add(ffmpeg
         --enable-zlib
         --enable-iconv
         --enable-libdav1d
-        --enable-libsvtav1
+        #--enable-libsvtav1
         #--enable-libcurl
         --enable-schannel
         --enable-d3d11va
